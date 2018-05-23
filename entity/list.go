@@ -1,4 +1,4 @@
-package entitylist
+package entity
 
 // Entity list
 type List struct {

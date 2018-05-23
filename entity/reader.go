@@ -1,4 +1,4 @@
-package entitylist
+package entity
 
 import "github.com/galaco/vmf"
 
