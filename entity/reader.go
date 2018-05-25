@@ -2,6 +2,7 @@ package entity
 
 import "github.com/galaco/vmf"
 
+// FromVmfNodeTree
 // Build an entity list
 // Constructs from the root node of Vmf entity data
 func FromVmfNodeTree(entityNodes vmf.Node) List {
@@ -26,7 +27,8 @@ func FromVmfNodeTree(entityNodes vmf.Node) List {
 	return entityList
 }
 
-
+// parseEPair
+// scoped Function for reading entity keyvalue pair
 func parseEPair(node *vmf.Node) *EPair {
 	if len(*node.GetAllValues()) > 1 {
 		return nil

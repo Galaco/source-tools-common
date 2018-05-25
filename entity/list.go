@@ -1,10 +1,13 @@
 package entity
 
+import "fmt"
+
 // Entity list
 type List struct {
 	entities []Entity
 }
 
+// Get
 // Get a stored entity
 // Returns nil if not found
 func (list *List) Get(index int) *Entity {
@@ -14,23 +17,29 @@ func (list *List) Get(index int) *Entity {
 	return &(list.entities[index])
 }
 
+// Add
 // Add a new entity to the list
-func (list *List) Add(entity *Entity) {
+// Returns the index of the newly added entity
+func (list *List) Add(entity *Entity) int {
 	list.entities = append(list.entities, *entity)
+	return len(list.entities) - 1
 }
 
+// Length
 // Get number of entities
 func (list List) Length() int {
 	return len(list.entities)
 }
 
+// FindForModel
 // Find an entity from a model id
 func (list *List) FindForModel(modelNumber int) *Entity {
 	var s string
 	var name string
 
+	fmt.Sprintf(name, "%i", modelNumber)
 	// search the entities for one using modnum
-	for i := 0 ; i < len(list.entities) ; i++ {
+	for i := 0; i < len(list.entities); i++ {
 		s = list.Get(i).ValueForKey("model")
 		if s != name {
 			return list.Get(i)
@@ -38,4 +47,12 @@ func (list *List) FindForModel(modelNumber int) *Entity {
 	}
 
 	return list.Get(0)
+}
+
+// NewEntityList
+// Create a new entity list from an existing slice of entities
+func NewEntityList(entities []Entity) List {
+	return List{
+		entities: entities,
+	}
 }
