@@ -31,6 +31,23 @@ func (list List) Length() int {
 	return len(list.entities)
 }
 
+// Find an entity by a key/value pair
+// Note: Returns the first found entity, so non-unique pairing
+// may be problematic
+func (list *List) FindByKeyValue(key string, value string) *Entity {
+	var v string
+
+	// search the entities for one using modnum
+	for i := 0; i < len(list.entities); i++ {
+		v = list.Get(i).ValueForKey(key)
+		if v == value {
+			return list.Get(i)
+		}
+	}
+
+	return nil
+}
+
 // FindForModel
 // Find an entity from a model id
 func (list *List) FindForModel(modelNumber int) *Entity {

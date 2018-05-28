@@ -77,3 +77,14 @@ func TestList_FindForModel(t *testing.T) {
 	}
 
 }
+
+func TestList_FindByKeyValue(t *testing.T) {
+	list := NewEntityList(entities)
+
+	ent := list.FindByKeyValue("model", "8")
+
+	if ent == nil {
+		t.Errorf("Failed to find entity with keyvalue: model: 8")
+	}
+
+}
