@@ -2,26 +2,40 @@ package entity
 
 import "github.com/galaco/vmf"
 
+// FromVmfNode parses a single Vmf node that represents an
+// entity
+func FromVmfNode(entityNode *vmf.Node) Entity {
+	var e *EPair
+	mapEnt := Entity{}
+	for _,kv := range *entityNode.GetAllValues() {
+		n := kv.(vmf.Node)
+		e = parseEPair(&n)
+		// ignore array children
+		if e == nil {
+			continue
+		}
+		e.Next = mapEnt.EPairs
+		mapEnt.EPairs = e
+	}
+
+	return mapEnt
+}
+
+
 // FromVmfNodeTree
 // Build an entity list
 // Constructs from the root node of Vmf entity data
 func FromVmfNodeTree(entityNodes vmf.Node) List {
 	numEntities := len(*entityNodes.GetAllValues())
 
-	entityList := List{
-		entities: make([]Entity, numEntities),
-	}
+	entities := make([]Entity, numEntities)
 
 	for i := 0; i < numEntities; i++ {
-		mapEnt := entityList.Get(i)
-		var e *EPair
 		eNode := (*entityNodes.GetAllValues())[i].(vmf.Node)
-		for _,kv := range *eNode.GetAllValues() {
-			n := kv.(vmf.Node)
-			e = parseEPair(&n)
-			e.Next = mapEnt.EPairs
-			mapEnt.EPairs = e
-		}
+		entities[i] = FromVmfNode(&eNode)
+	}
+	entityList := List{
+		entities: entities,
 	}
 
 	return entityList
