@@ -1,14 +1,11 @@
 package entity
 
-import "fmt"
-
-// Entity list
+// List is an entity list
 type List struct {
 	entities []Entity
 }
 
-// Get
-// Get a stored entity
+// Get gets a stored entity
 // Returns nil if not found
 func (list *List) Get(index int) *Entity {
 	if len(list.entities) <= index {
@@ -17,21 +14,19 @@ func (list *List) Get(index int) *Entity {
 	return &(list.entities[index])
 }
 
-// Add
-// Add a new entity to the list
+// Add adds a new entity to the list
 // Returns the index of the newly added entity
 func (list *List) Add(entity *Entity) int {
 	list.entities = append(list.entities, *entity)
 	return len(list.entities) - 1
 }
 
-// Length
-// Get number of entities
+// Length gets number of entities
 func (list List) Length() int {
 	return len(list.entities)
 }
 
-// Find an entity by a key/value pair
+// FindByKeyValue finds an entity by a key/value pair
 // Note: Returns the first found entity, so non-unique pairing
 // may be problematic
 func (list *List) FindByKeyValue(key string, value string) *Entity {
@@ -48,13 +43,11 @@ func (list *List) FindByKeyValue(key string, value string) *Entity {
 	return nil
 }
 
-// FindForModel
-// Find an entity from a model id
+// FindForModel finds an entity from a model id
 func (list *List) FindForModel(modelNumber int) *Entity {
 	var s string
 	var name string
 
-	fmt.Sprintf(name, "%i", modelNumber)
 	// search the entities for one using modnum
 	for i := 0; i < len(list.entities); i++ {
 		s = list.Get(i).ValueForKey("model")

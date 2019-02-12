@@ -7,7 +7,7 @@ import "github.com/galaco/vmf"
 func FromVmfNode(entityNode *vmf.Node) Entity {
 	var e *EPair
 	mapEnt := Entity{}
-	for _,kv := range *entityNode.GetAllValues() {
+	for _, kv := range *entityNode.GetAllValues() {
 		n := kv.(vmf.Node)
 		e = parseEPair(&n)
 		// ignore array children
@@ -20,7 +20,6 @@ func FromVmfNode(entityNode *vmf.Node) Entity {
 
 	return mapEnt
 }
-
 
 // FromVmfNodeTree
 // Build an entity list
@@ -41,8 +40,7 @@ func FromVmfNodeTree(entityNodes vmf.Node) List {
 	return entityList
 }
 
-// parseEPair
-// scoped Function for reading entity keyvalue pair
+// parseEPair scoped Function for reading entity keyvalue pair
 func parseEPair(node *vmf.Node) *EPair {
 	if len(*node.GetAllValues()) > 1 {
 		return nil
@@ -51,8 +49,8 @@ func parseEPair(node *vmf.Node) *EPair {
 	switch (*node.GetAllValues())[0].(type) {
 	case string:
 		return &EPair{
-			Next: nil,
-			Key: *(*node).GetKey(),
+			Next:  nil,
+			Key:   *(*node).GetKey(),
 			Value: (*node.GetAllValues())[0].(string),
 		}
 	default:

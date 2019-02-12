@@ -4,3 +4,7 @@
 
 # source-tools-common
 Common libs for Source engine tools
+
+* Entity KeyValue implementation
+* Valve CRC implementation
+* StringTable implementation

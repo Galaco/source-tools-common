@@ -69,6 +69,7 @@ var valveCRC32Table = crc32.Table([256]uint32{
 	0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d,
 })
 
+// CRC32 Produces a 2byte crc for a byte slice
 func CRC32(data []byte) uint16 {
 	cc := crc32.Checksum(data, &valveCRC32Table)
 	lowpart := (cc & 0xffff)

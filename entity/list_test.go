@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"testing"
 	"github.com/go-gl/mathgl/mgl32"
 	"reflect"
+	"testing"
 )
 
 var entities = []Entity{
@@ -13,8 +13,8 @@ var entities = []Entity{
 	{
 		Origin: mgl32.Vec3{0, 1, 0},
 		EPairs: &EPair{
-			Next: nil,
-			Key: "model",
+			Next:  nil,
+			Key:   "model",
 			Value: "8",
 		},
 	},
@@ -49,7 +49,6 @@ func TestList_Add(t *testing.T) {
 	}
 
 	index := list.Add(&newEnt)
-
 
 	ent := list.Get(index)
 	if ent.Origin.Y() != 2 {
